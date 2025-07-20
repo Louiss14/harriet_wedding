@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harriet and Tobys Wedding Connections</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 1.8em;
+    }
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+      max-width: 400px;
+    }
+    .word-button {
+      padding: 20px;
+      font-size: 1em;
+      text-align: center;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      background-color: #f0f0f0;
+      cursor: pointer;
+      user-select: none;
+    }
+    .word-button.selected {
+      background-color: #add8e6;
+    }
+    .word-button.correct {
+      background-color: lightgreen;
+      pointer-events: none;
+    }
+    #feedback, #found {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Harriet and Toby Wedding Connections</h1>
+  <div id="instructions">Select 4 related words</div>
+  <div id="feedback"></div>
+  <div id="found"></div>
+  <div id="grid"></div>
+
+  <script>
+    const categories = {
+      "Colors": ["Red", "Blue", "Green", "Yellow"],
+      "Fruits": ["Apple", "Banana", "Orange", "Grape"],
+      "Animals": ["Dog", "Cat", "Elephant", "Lion"],
+      "Countries": ["USA", "Canada", "India", "Brazil"]
+    };
+
+    const allWords = Object.values(categories).flat();
+    const shuffledWords = allWords.sort(() => Math.random() - 0.5);
+    const grid = document.getElementById('grid');
+    const feedback = document.getElementById('feedback');
+    const found = document.getElementById('found');
+
+    const selected = [];
+    const foundGroups = new Set();
+
+    function createButton(word) {
+      const btn = document.createElement('div');
+      btn.classList.add('word-button');
+      btn.textContent = word;
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('correct')) return;
+
+        btn.classList.toggle('selected');
+        if (btn.classList.contains('selected')) {
+          selected.push(btn);
+        } else {
+          const index = selected.indexOf(btn);
+          if (index > -1) selected.splice(index, 1);
+        }
+
+        if (selected.length === 4) checkGroup();
+      });
+      return btn;
+    }
+
+    function checkGroup() {
+      const selectedWords = selected.map(btn => btn.textContent);
+      for (const [category, group] of Object.entries(categories)) {
+        if (group.every(word => selectedWords.includes(word)) && !foundGroups.has(category)) {
+          selected.forEach(btn => {
+            btn.classList.remove('selected');
+            btn.classList.add('correct');
+          });
+          feedback.textContent = `Correct! Group: ${category}`;
+          foundGroups.add(category);
+          updateFound();
+          if (foundGroups.size === 4) {
+            alert("You Win! You found all the connections!");
+          }
+          selected.length = 0;
+          return;
+        }
+      }
+      feedback.textContent = "Try again. That group is not correct.";
+      selected.forEach(btn => btn.classList.remove('selected'));
+      selected.length = 0;
+    }
+
+    function updateFound() {
+      found.textContent = `Found groups: ${Array.from(foundGroups).join(', ')}`;
+    }
+
+    shuffledWords.forEach(word => {
+      grid.appendChild(createButton(word));
+    });
+  </script>
+</body>
+</html>
