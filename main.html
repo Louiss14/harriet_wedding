@@ -17,7 +17,7 @@
     }
     #grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
       margin-top: 20px;
       max-width: 400px;
@@ -47,17 +47,16 @@
 </head>
 <body>
   <h1>Harriet and Toby Wedding Connections</h1>
-  <div id="instructions">Select 4 related words</div>
+  <div id="instructions">Select 3 related words</div>
   <div id="feedback"></div>
   <div id="found"></div>
   <div id="grid"></div>
 
   <script>
     const categories = {
-      "Colors": ["Red", "Blue", "Green", "Yellow"],
-      "Fruits": ["Apple", "Banana", "Orange", "Grape"],
-      "Animals": ["Dog", "Cat", "Elephant", "Lion"],
-      "Countries": ["USA", "Canada", "India", "Brazil"]
+      "Schools": ["John", "King", "Hill"],
+    "Pets": ["Poppy", "Molly", "Bertie"],
+    "Siblings": ["William", "Louis", "Tobys sister"]
     };
 
     const allWords = Object.values(categories).flat();
@@ -84,7 +83,7 @@
           if (index > -1) selected.splice(index, 1);
         }
 
-        if (selected.length === 4) checkGroup();
+        if (selected.length === 3) checkGroup();
       });
       return btn;
     }
@@ -100,7 +99,7 @@
           feedback.textContent = `Correct! Group: ${category}`;
           foundGroups.add(category);
           updateFound();
-          if (foundGroups.size === 4) {
+          if (foundGroups.size === 3) {
             alert("You Win! You found all the connections!");
           }
           selected.length = 0;
