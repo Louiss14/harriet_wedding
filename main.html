@@ -47,16 +47,16 @@
 </head>
 <body>
   <h1>Harriet and Toby Wedding Connections</h1>
-  <div id="instructions">Select 3 related words</div>
+  <div id="instructions">Select 4 related words</div>
   <div id="feedback"></div>
   <div id="found"></div>
   <div id="grid"></div>
 
   <script>
     const categories = {
-      "Schools": ["John", "King", "Hill"],
-    "Pets": ["Poppy", "Molly", "Bertie"],
-    "Siblings": ["William", "Louis", "Tobys sister"]
+    "Schools": ["John", "King", "Hill", "Kingfisher"],
+    "Pets": ["Poppy", "Molly", "Bertie", "Bud"],
+    "Siblings": ["William", "Louis", "Holly", "Anne",]
     };
 
     const allWords = Object.values(categories).flat();
@@ -83,7 +83,7 @@
           if (index > -1) selected.splice(index, 1);
         }
 
-        if (selected.length === 3) checkGroup();
+        if (selected.length === 4) checkGroup();
       });
       return btn;
     }
