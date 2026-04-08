@@ -37,6 +37,13 @@ window.addEventListener('pointerup', () => {
   strandsIsDragging = false;
 });
 
+window.addEventListener('touchend', () => {
+  if (strandsIsDragging && strandsSelectedPath.length > 0) {
+    submitStrandsWord();
+  }
+  strandsIsDragging = false;
+}, { passive: false });
+
 const wordleAnswer = 'BRIDE';
 let wordleAttempts = [];
 let wordleSolved = false;
@@ -122,10 +129,14 @@ function initializeStrandsGame() {
       letterDiv.dataset.index = row * 6 + col;
       
       strandsLetterDivs[`${row},${col}`] = letterDiv;
-      letterDiv.style.touchAction = 'none';
       
       letterDiv.addEventListener('pointerdown', (e) => handleStrandsPointerDown(row, col, e));
       letterDiv.addEventListener('pointerenter', () => handleStrandsPointerEnter(row, col));
+      
+      // Touch events for mobile compatibility
+      letterDiv.addEventListener('touchstart', (e) => handleStrandsTouchStart(row, col, e), { passive: false });
+      letterDiv.addEventListener('touchmove', (e) => handleStrandsTouchMove(e), { passive: false });
+      
       grid.appendChild(letterDiv);
     }
   }
@@ -141,6 +152,26 @@ function handleStrandsPointerDown(row, col, event) {
 function handleStrandsPointerEnter(row, col) {
   if (!strandsIsDragging) return;
   selectStrandsLetter(row, col, new PointerEvent('pointerenter'));
+}
+
+function handleStrandsTouchStart(row, col, event) {
+  event.preventDefault();
+  strandsIsDragging = true;
+  selectStrandsLetter(row, col, event);
+}
+
+function handleStrandsTouchMove(event) {
+  event.preventDefault();
+  if (!strandsIsDragging) return;
+  
+  const touch = event.touches[0];
+  const element = document.elementFromPoint(touch.clientX, touch.clientY);
+  
+  if (element && element.classList.contains('strands-letter') && !element.classList.contains('found')) {
+    const row = parseInt(element.dataset.row);
+    const col = parseInt(element.dataset.col);
+    selectStrandsLetter(row, col, event);
+  }
 }
 
 function initializeWordleGame() {
