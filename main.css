@@ -19,10 +19,19 @@ h1 {
 h1.hidden {
   display: none;
 }
+#gameHeader {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: nowrap;
+  width: 100%;
+}
 .game-title {
   font-size: 2em;
-  text-align: center;
-  margin-bottom: 20px;
+  text-align: center;    
+
   display: none;
 }
 .game-title.connections {
@@ -73,12 +82,10 @@ h1.hidden {
 }
 #gameContainer.active {
   display: block;
-  text-align: center;
 }
 #backButton {
-  margin-top: 20px;
-  padding: 15px 30px;
-  font-size: 1em;
+  padding: 10px 20px;
+  font-size: 0.9em;
   background-color: #666;
   color: white;
   border: 2px solid #666;
@@ -87,9 +94,8 @@ h1.hidden {
   transition: all 0.3s;
 }
 #backButton:hover {
-  background-color: #555;
-  border-color: #555;
-  transform: scale(1.05);
+  background-color: #444;
+  border-color: #444;
 }
 #grid {
   display: grid;
@@ -135,7 +141,7 @@ h1.hidden {
   color: white;
   pointer-events: none;
 }
-#feedback, #found, #strandsFeedback, #strandsCurrentWord {
+#feedback, #found, #strandsFeedback {
   margin-top: 15px;
   font-size: 1em;
   font-weight: bold;
@@ -294,6 +300,11 @@ h1.hidden {
   max-width: 360px;
   margin-left: auto;
   margin-right: auto;
+  background-color: #fff3cd;
+  border: 2px solid #ffc107;
+  border-radius: 8px;
+  padding: 8px 16px;
+  color: #856404;
 }
 #strandsFeedback {
   background-color: #fff3cd;

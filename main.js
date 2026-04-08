@@ -117,7 +117,6 @@ function initializeStrandsGame() {
   strandsSelectedPath = [];
   strandsFoundWords.clear();
   document.getElementById('strandsFeedback').textContent = '';
-  document.getElementById('strandsCurrentWord').textContent = '';
   document.getElementById('strandsFound').innerHTML = '';
   
   const grid = document.getElementById('strandsGrid');
@@ -297,7 +296,7 @@ function isValidNextCell(row, col) {
 
 function updateStrandsCurrentWord() {
   const word = strandsSelectedPath.map(pos => pos.letter).join('');
-  document.getElementById('strandsCurrentWord').textContent = word;
+  document.getElementById('strandsFeedback').textContent = word;
 }
 
 function submitStrandsWord() {
@@ -346,7 +345,7 @@ function clearStrandsSelection() {
     }
   });
   strandsSelectedPath = [];
-  document.getElementById('strandsCurrentWord').textContent = '';
+  document.getElementById('strandsFeedback').textContent = '';
 }
 
 function updateStrandsFoundDisplay() {

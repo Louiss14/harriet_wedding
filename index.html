@@ -9,10 +9,6 @@
 <body>
   <h1>Harriet and Toby's Wedding Games</h1>
   
-  <div class="game-title connections">🔗 Connections</div>
-  <div class="game-title strands">🧵 Strands</div>
-  <div class="game-title wordle">🟩 Wordle</div>
-  
   <div id="menu">
     <p>Choose a game:</p>
     <button class="game-button connections" onclick="startGame('connections')">🔗 Connections</button>
@@ -21,7 +17,12 @@
   </div>
 
   <div id="gameContainer">
-    <button id="backButton" onclick="goBackToMenu()">← Back to Menu</button>
+    <div id="gameHeader">
+      <button id="backButton" onclick="goBackToMenu()">← To Menu</button>
+      <div class="game-title connections">🔗 Connections</div>
+      <div class="game-title strands">🧵 Strands</div>
+      <div class="game-title wordle">🟩 Wordle</div>
+    </div>
     
     <div id="connectionsGame" style="display: none;">
       <div id="instructions">Select 4 related words</div>
@@ -32,7 +33,6 @@
 
     <div id="strandsGame" style="display: none;">
       <div id="instructions">Find all theme words. Click and drag to select letters, release to submit.</div>
-      <div id="strandsCurrentWord"></div>
       <div id="strandsFeedback"></div>
       <div id="strandsFound"></div>
       <div id="strandsGrid"></div>
@@ -40,11 +40,11 @@
 
     <div id="wordleGame" style="display: none;">
       <div id="instructions">Guess the 5-letter wedding word. You have 6 attempts.</div>
+      <div id="wordleFeedback"></div>
       <div class="wordle-controls">
         <input id="wordleInput" type="text" maxlength="5" placeholder="Enter guess" autocomplete="off">
         <button id="wordleSubmit" onclick="submitWordleGuess()">Submit</button>
       </div>
-      <div id="wordleFeedback"></div>
       <div id="wordleGrid"></div>
     </div>
   </div>
