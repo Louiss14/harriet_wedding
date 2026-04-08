@@ -13,6 +13,7 @@
     <p>Choose a game:</p>
     <button class="game-button connections" onclick="startGame('connections')">🔗 Connections</button>
     <button class="game-button strands" onclick="startGame('strands')">🧵 Strands</button>
+    <button class="game-button wordle" onclick="startGame('wordle')">🟩 Wordle</button>
   </div>
 
   <div id="gameContainer">
@@ -26,11 +27,21 @@
     </div>
 
     <div id="strandsGame" style="display: none;">
-      <div id="instructions">Find all theme words. Double-tap the last letter to submit.</div>
+      <div id="instructions">Find all theme words. Click and drag to select letters, release to submit.</div>
       <div id="strandsCurrentWord"></div>
       <div id="strandsFeedback"></div>
       <div id="strandsFound"></div>
       <div id="strandsGrid"></div>
+    </div>
+
+    <div id="wordleGame" style="display: none;">
+      <div id="instructions">Guess the 5-letter wedding word. You have 6 attempts.</div>
+      <div class="wordle-controls">
+        <input id="wordleInput" type="text" maxlength="5" placeholder="Enter guess" autocomplete="off">
+        <button id="wordleSubmit" onclick="submitWordleGuess()">Submit</button>
+      </div>
+      <div id="wordleFeedback"></div>
+      <div id="wordleGrid"></div>
     </div>
   </div>
 
