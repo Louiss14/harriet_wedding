@@ -75,6 +75,11 @@ function startGame(game) {
   document.getElementById('menu').style.display = 'none';
   document.getElementById('gameContainer').classList.add('active');
   
+  // Hide main title and show game title
+  document.querySelector('h1').classList.add('hidden');
+  document.querySelectorAll('.game-title').forEach(title => title.style.display = 'none');
+  document.querySelector(`.game-title.${game}`).style.display = 'block';
+  
   if (game === 'connections') {
     document.getElementById('connectionsGame').style.display = 'block';
     document.getElementById('strandsGame').style.display = 'none';
@@ -355,7 +360,8 @@ function createConnectionsButton(word) {
   const btn = document.createElement('div');
   btn.classList.add('word-button');
   btn.textContent = word;
-  btn.addEventListener('click', () => {
+  btn.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
     if (btn.classList.contains('correct')) return;
 
     btn.classList.toggle('selected');
@@ -407,6 +413,10 @@ function goBackToMenu() {
   document.getElementById('connectionsGame').style.display = 'none';
   document.getElementById('strandsGame').style.display = 'none';
   document.getElementById('wordleGame').style.display = 'none';
+  
+  // Show main title and hide game titles
+  document.querySelector('h1').classList.remove('hidden');
+  document.querySelectorAll('.game-title').forEach(title => title.style.display = 'none');
   
   connectionsSelected.length = 0;
   strandsSelectedPath = [];

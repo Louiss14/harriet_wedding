@@ -1,20 +1,45 @@
-body {
+html, body {
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   background-color: #fff;
+  overflow: hidden;
+  height: 100vh;
+  margin: 0;
+  box-sizing: border-box;
 }
 h1 {
-  font-size: 1.8em;
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+h1.hidden {
+  display: none;
+}
+.game-title {
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 20px;
+  display: none;
+}
+.game-title.connections {
+  color: #2196F3;
+}
+.game-title.strands {
+  color: #FF6B35;
+}
+.game-title.wordle {
+  color: #4CAF50;
 }
 #menu {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 .game-button {
   padding: 20px 40px;
@@ -71,7 +96,7 @@ h1 {
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   margin-top: 20px;
-  max-width: 400px;
+  width: 400px;
 }
 #strandsGrid {
   display: grid;
@@ -91,6 +116,10 @@ h1 {
   color: #000000;
   cursor: pointer;
   user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 .word-button:hover:not(.correct) {
   background-color: #e0e0e0;
@@ -282,4 +311,19 @@ h1 {
   text-align: center;
   margin-bottom: 10px;
   color: #333;
+}
+
+/* Mobile optimizations */
+@media (max-width: 600px) {
+  #grid {
+    max-width: 320px;
+    gap: 8px;
+  }
+  .word-button {
+    padding: 15px;
+    font-size: 0.9em;
+  }
+  #found, #feedback {
+    max-width: 320px;
+  }
 }
